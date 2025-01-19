@@ -1,4 +1,4 @@
-# Nuxt application for english leerning
+# Nuxt application for english learning
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
