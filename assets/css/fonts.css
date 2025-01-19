@@ -1,0 +1,28 @@
+/* cyrillic */
+@font-face {
+  font-family: "Playfair Display";
+  font-style: italic;
+  font-weight: 400 900;
+  src: url(@assets/fonts/Playfair/playfair_cyrillic_italic.woff2)
+    format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  style: normal;
+  font-weight: 400 900;
+  src: url(@/assets/fonts/Playfair/playfair_cyrillic.woff2) format("woff2");
+}
+
+/* latin */
+@font-face {
+  font-family: "Playfair Display";
+  style: italic;
+  font-weight: 400 900;
+  src: url(@assets/fonts/Playfair/playfair_latin_italic.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  style: normal;
+  font-weight: 400 900;
+  src: url(@assets/fonts/Playfair/playfair_latin.woff2) format("woff2");
+}
