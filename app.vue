@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { myHtml } from "@/utils/helpers";
 import TabsTabTranslate from "@/components/tabs/TabTranslate.vue";
+import TabsTabDragdrop from "@/components/tabs/TabDragdrop.vue";
 
 const tabs = [
   { name: "translate", label: "Translate" },
@@ -34,7 +35,9 @@ const isChangedTextareaValue = ref(false);
                 :removedKeyboardListeners="removedKeyboardListeners"
               />
             </div>
-            <div v-if="activeTab === 'dragdrop'">Content for Tab 2</div>
+            <div v-if="activeTab === 'dragdrop'">
+                <TabsTabDragdrop />
+            </div>
             <div v-if="activeTab === 'writing'">Content for Tab 3</div>
           </template>
         </Tabs>
