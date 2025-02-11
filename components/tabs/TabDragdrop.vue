@@ -4,6 +4,14 @@ const props = defineProps(["changedList", "removeListeners"]);
 const handleChangedList = () => {};
 const handleRemoveKeyListener = () => {};
 
+interface Sentence {
+    list: string[][];
+}
+const sentences: Sentence = reactive({
+    list: [['word', 'слово']],
+})
+const counter = ref(0);
+
 watch(props.changedList, (newVal, oldChangedList) => {
   if (newVal) {
     handleChangedList();
@@ -19,7 +27,7 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
 <template>
   <h1>Drag & Drop</h1>
   <div class="card-body d-flex flex-column justify-content-center text-center">
-    <h2 id="dragdrop_question" class="dragdrop__question fs-1 text-light"></h2>
+    <h2 id="dragdrop_question" class="dragdrop__question fs-1 text-light">{{ sentences.list[counter][0] }}</h2>
     <div
       id="dragdrop_answer"
       class="dragdrop__answer mb-2 position-relative h-50 fs-4 link-body-emphasis"
