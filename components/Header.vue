@@ -3,7 +3,6 @@
     <nav>
       <ul class="flex">
         <li><NuxtLink to="/">Home</NuxtLink></li>
-        <li><NuxtLink to="/dragdrop">Drag & Drop game</NuxtLink></li>
         <li><NuxtLink to="/writing">Writing game</NuxtLink></li>
       </ul>
     </nav>
