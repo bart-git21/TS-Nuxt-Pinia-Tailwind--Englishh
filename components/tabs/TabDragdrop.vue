@@ -98,3 +98,32 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.btn--red {
+  max-width: max-content;
+  padding: 5px 10px;
+  border: 5px solid;
+  border-image-slice: 1;
+  @apply bg-gradient;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  border-image-source: linear-gradient(
+    to left top,
+    #dd2476 20%,
+    #ff512f 80%
+  ) !important;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  user-select: none;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    -webkit-background-clip: none !important;
+    -webkit-text-fill-color: #000 !important;
+    border: 5px solid #000 !important;
+    box-shadow: #222 1px 0 10px;
+  }
+}
+</style>
