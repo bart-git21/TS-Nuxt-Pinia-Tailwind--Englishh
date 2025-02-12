@@ -14,27 +14,33 @@ const sentences: Sentence = reactive({
   list: [["first word", "слово"]],
 });
 
-const sentence: ComputedRef<string[]> = computed(() => {
-  let words: string[] =
-    sentences.list.length > 0
-      ? sentences.list[counter.value][0].split(" ")
-      : [];
-  shuffle(words);
-  return words;
-});
+const sentence: Ref<string[]> = ref([]);
 
 // logic
 const start = () => {
   counter.value = 0;
   sentences.list = store.getShallowCopy();
-  displaySentence();
+  initSentence();
 };
 
-const displaySentence = () => {
+const initSentence = () => {
   if (counter.value < sentences.list.length) {
-    counter.value++;
+    let words: string[] =
+      sentences.list.length > 0
+        ? sentences.list[counter.value][0].split(" ")
+        : [];
+    shuffle(words);
+    sentence.value = words;
   } else counter.value = -1;
 };
+
+const incrementCounter = () => {
+  counter.value++;
+};
+
+watch(counter, (val, oldChangedList) => {
+  initSentence();
+});
 
 watch(props.changedList, (newVal, oldChangedList) => {
   if (newVal) {
@@ -66,7 +72,11 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
     <button id="dragdrop_btn_start" class="btn btn--red" @click="start">
       <i class="fas fa-power-off"></i> Start
     </button>
-    <button id="dragdrop_btn_check" class="btn btn--red">
+    <button
+      id="dragdrop_btn_check"
+      class="btn btn--red"
+      @click="incrementCounter"
+    >
       <i class="fas fa-play"></i> Check and Continue
     </button>
     <div
