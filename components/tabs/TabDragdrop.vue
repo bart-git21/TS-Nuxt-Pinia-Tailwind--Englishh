@@ -27,11 +27,30 @@ const initSentence = () => {
   if (counter.value < sentences.list.length) {
     let words: string[] =
       sentences.list.length > 0
-        ? sentences.list[counter.value][0].trim().split(" ")
+        ? sentences.list[counter.value][0].trim().toLowerCase().split(" ")
         : [];
     shuffle(words);
     sentence.value = words;
   } else counter.value = -1;
+};
+
+const check = () => {
+  const nodeList = document.querySelectorAll<HTMLDivElement>(
+    ".btn--word"
+  ) as NodeListOf<HTMLDivElement>;
+  let buttons: HTMLDivElement[] = [...nodeList];
+  const userOrder: { [key: number]: string } = {};
+  buttons.forEach((e: HTMLDivElement) => {
+    const xCoord = e.getBoundingClientRect().x;
+    const key: number = Math.floor(xCoord);
+    userOrder[key] = e.textContent ?? "";
+  });
+  const userString = Object.values(userOrder).join(" ").toLowerCase();
+  if (userString === sentences.list[counter.value][0].trim().toLowerCase()) {
+    incrementCounter();
+  } else {
+    alert("It's not correct. Try again!");
+  }
 };
 
 const incrementCounter = () => {
@@ -70,12 +89,15 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
     <button id="dragdrop_btn_start" class="btn btn--red" @click="start">
       <i class="fas fa-power-off"></i> Start
     </button>
+    <button id="dragdrop_btn_check" class="btn btn--red" @click="check">
+      <i class="fas fa-play"></i> Check and Continue
+    </button>
     <button
       id="dragdrop_btn_check"
       class="btn btn--red"
       @click="incrementCounter"
     >
-      <i class="fas fa-play"></i> Check and Continue
+      <i class="fas fa-play"></i> Next sentence without checking
     </button>
     <div
       class="progress mt-3"
@@ -109,6 +131,7 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
 
 <style scoped>
 .card-body {
+  color: #fff;
   height: max(300px, 30vh);
   background: linear-gradient(to bottom right, red, purple);
 }
