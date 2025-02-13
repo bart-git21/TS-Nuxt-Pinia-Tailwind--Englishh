@@ -55,13 +55,12 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
 </script>
 
 <template>
-  <h1>Drag & Drop</h1>
   <div class="card-body d-flex flex-column justify-content-center text-center">
     <h2 class="dragdrop__question fs-1 text-light">
       {{ sentences.list[counter][1] }}
     </h2>
-    <div class="dragdrop__answer">
-      <div class="btn--red" v-for="(word, index) in sentence" :key="index">
+    <div class="dragdrop__answer flex justify-between">
+      <div class="btn btn--word" v-for="(word, index) in sentence" :key="index">
         {{ word }}
       </div>
     </div>
@@ -109,14 +108,26 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
 </template>
 
 <style scoped>
-.dragdrop__answer {
+.card-body {
   height: max(300px, 30vh);
   background: linear-gradient(to bottom right, red, purple);
 }
-.btn--red {
+.btn {
+  cursor: pointer;
   max-width: max-content;
   padding: 5px 10px;
   border: 5px solid;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  user-select: none;
+  color: #fff;
+
+  &:hover,
+  &:focus {
+    box-shadow: #222 1px 0 10px;
+  }
+}
+.btn--red {
   border-image-slice: 1;
   @apply bg-gradient;
   -webkit-background-clip: text !important;
@@ -126,17 +137,18 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
     #dd2476 20%,
     #ff512f 80%
   ) !important;
-  text-decoration: none;
-  transition: all 0.4s ease;
-  user-select: none;
 
   &:hover,
   &:focus {
-    cursor: pointer;
     -webkit-background-clip: none !important;
     -webkit-text-fill-color: #000 !important;
+    border: 5px solid #fff !important;
+  }
+}
+.btn--word {
+  &:hover,
+  &:focus {
     border: 5px solid #000 !important;
-    box-shadow: #222 1px 0 10px;
   }
 }
 </style>
