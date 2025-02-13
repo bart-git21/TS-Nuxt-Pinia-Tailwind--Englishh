@@ -57,15 +57,14 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
 <template>
   <h1>Drag & Drop</h1>
   <div class="card-body d-flex flex-column justify-content-center text-center">
-    <h2 id="dragdrop_question" class="dragdrop__question fs-1 text-light">
+    <h2 class="dragdrop__question fs-1 text-light">
+      {{ sentences.list[counter][1] }}
+    </h2>
+    <div class="dragdrop__answer">
       <div class="btn--red" v-for="(word, index) in sentence" :key="index">
         {{ word }}
       </div>
-    </h2>
-    <div
-      id="dragdrop_answer"
-      class="dragdrop__answer mb-2 position-relative h-50 fs-4 link-body-emphasis"
-    ></div>
+    </div>
   </div>
 
   <div class="card-footer position-relative">
@@ -110,6 +109,10 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
 </template>
 
 <style scoped>
+.dragdrop__answer {
+  height: max(300px, 30vh);
+  background: linear-gradient(to bottom right, red, purple);
+}
 .btn--red {
   max-width: max-content;
   padding: 5px 10px;
