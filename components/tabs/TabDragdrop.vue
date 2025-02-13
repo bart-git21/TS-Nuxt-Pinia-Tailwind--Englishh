@@ -27,7 +27,7 @@ const initSentence = () => {
   if (counter.value < sentences.list.length) {
     let words: string[] =
       sentences.list.length > 0
-        ? sentences.list[counter.value][0].split(" ")
+        ? sentences.list[counter.value][0].trim().split(" ")
         : [];
     shuffle(words);
     sentence.value = words;
