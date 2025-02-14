@@ -3,6 +3,7 @@ import { shuffle } from "@/utils/helpers.js";
 const store = useListStore();
 const props = defineProps(["changedList", "removeListeners"]);
 const counter = ref(0);
+const target = ref(null) as Ref<HTMLElement | null>;
 
 const handleChangedList = () => {};
 const handleRemoveKeyListener = () => {};
@@ -51,6 +52,9 @@ const check = () => {
   } else {
     alert("It's not correct. Try again!");
   }
+};
+const grab = (e: MouseEvent) => {
+  target.value = e.target as HTMLElement;
 };
 
 const incrementCounter = () => {
