@@ -56,6 +56,9 @@ const check = () => {
 const grab = (e: MouseEvent) => {
   target.value = e.target as HTMLElement;
 };
+const drop = (): void => {
+  target.value = null;
+};
 
 const incrementCounter = () => {
   counter.value++;
