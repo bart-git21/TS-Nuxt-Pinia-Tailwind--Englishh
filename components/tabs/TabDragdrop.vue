@@ -4,6 +4,7 @@ const store = useListStore();
 const props = defineProps(["changedList", "removeListeners"]);
 const counter = ref(0);
 const target = ref(null) as Ref<HTMLElement | null>;
+const isMove = ref(false);
 
 const handleChangedList = () => {};
 const handleRemoveKeyListener = () => {};
@@ -59,6 +60,22 @@ const mousedown = (event: MouseEvent) => {
   target.value = [...clickedElement?.classList].includes("btn--word")
     ? clickedElement
     : null;
+};
+
+const move = (event: MouseEvent) => {
+  if (!target.value) return;
+  if (isMove.value) return;
+  isMove.value = true;
+  target.value.style.position = "absolute";
+  target.value.style.left = `${
+    event.clientX - dragdropAnswer.getBoundingClientRect().left
+  }px`;
+  target.value.style.top = `${
+    event.clientY - dragdropAnswer.getBoundingClientRect().top
+  }px`;
+  setTimeout(() => {
+    isMove.value = false;
+  }, 50);
 };
 
 const incrementCounter = () => {
