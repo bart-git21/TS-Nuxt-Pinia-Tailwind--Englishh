@@ -53,11 +53,12 @@ const check = () => {
     alert("It's not correct. Try again!");
   }
 };
-const grab = (e: MouseEvent) => {
-  target.value = e.target as HTMLElement;
-};
-const drop = (): void => {
-  target.value = null;
+
+const mousedown = (event: MouseEvent) => {
+  const clickedElement = event.target as HTMLElement;
+  target.value = [...clickedElement?.classList].includes("btn--word")
+    ? clickedElement
+    : null;
 };
 
 const incrementCounter = () => {
@@ -85,7 +86,7 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
     <h2 class="dragdrop__question fs-1 text-light">
       {{ sentences.list[counter][1] }}
     </h2>
-    <div class="dragdrop__answer flex justify-between">
+    <div class="dragdrop__answer flex justify-between" @mousedown="mousedown">
       <div class="btn btn--word" v-for="(word, index) in sentence" :key="index">
         {{ word }}
       </div>
