@@ -67,12 +67,8 @@ const move = (event: MouseEvent) => {
   if (isMove.value) return;
   isMove.value = true;
   target.value.style.position = "absolute";
-  target.value.style.left = `${
-    event.clientX - dragdropAnswer.getBoundingClientRect().left
-  }px`;
-  target.value.style.top = `${
-    event.clientY - dragdropAnswer.getBoundingClientRect().top
-  }px`;
+  target.value.style.left = `${event.clientX}px`;
+  target.value.style.top = `${event.clientY}px`;
   setTimeout(() => {
     isMove.value = false;
   }, 50);
@@ -103,7 +99,11 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
     <h2 class="dragdrop__question fs-1 text-light">
       {{ sentences.list[counter][1] }}
     </h2>
-    <div class="dragdrop__answer flex justify-between" @mousedown="mousedown">
+    <div
+      class="dragdrop__answer flex justify-between"
+      @mousedown="mousedown"
+      @mousemove="move"
+    >
       <div class="btn btn--word" v-for="(word, index) in sentence" :key="index">
         {{ word }}
       </div>
