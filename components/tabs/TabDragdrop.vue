@@ -43,7 +43,7 @@ const initSentence = () => {
   } else counter.value = -1;
 };
 
-const check = () => {
+const compareStrings = () => {
   const nodeList = document.querySelectorAll<HTMLDivElement>(
     ".btn--word"
   ) as NodeListOf<HTMLDivElement>;
@@ -55,11 +55,11 @@ const check = () => {
     userOrder[key] = e.textContent ?? "";
   });
   const userString = Object.values(userOrder).join(" ").toLowerCase();
-  if (userString === sentences.list[counter.value][0].trim().toLowerCase()) {
-    incrementCounter();
-  } else {
-    alert("It's not correct. Try again!");
-  }
+  return userString === sentences.list[counter.value][0].trim().toLowerCase();
+};
+
+const check = () => {
+  compareStrings() ? incrementCounter() : alert("It's not correct. Try again!");
 };
 
 const mousedown = (event: MouseEvent) => {
@@ -117,11 +117,7 @@ onMounted(() => {
     <h2 class="dragdrop__question fs-1 text-light">
       {{ sentences.list[counter][1] }}
     </h2>
-    <div
-      ref="gameField"
-      @mousedown="mousedown"
-      @mousemove="move"
-    >
+    <div ref="gameField" @mousedown="mousedown" @mousemove="move">
       <div class="btn btn--word" v-for="(word, index) in sentence" :key="index">
         {{ word }}
       </div>
