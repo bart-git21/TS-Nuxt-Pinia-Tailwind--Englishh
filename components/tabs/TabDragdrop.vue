@@ -140,7 +140,7 @@ onMounted(() => {
       class="btn btn--red"
       @click="incrementCounter"
     >
-      <i class="fas fa-play"></i> Next sentence without checking
+      <i class="fas fa-play"></i> Continue
     </button>
     <div
       class="progress mt-3"
