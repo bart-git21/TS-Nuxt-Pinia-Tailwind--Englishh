@@ -5,6 +5,13 @@ const props = defineProps(["changedList", "removeListeners"]);
 const counter = ref(0);
 const target = ref(null) as Ref<HTMLElement | null>;
 const isMove = ref(false);
+const gameField = ref() as Ref<HTMLElement>;
+const edgesOfGameField = reactive({
+  left: 0,
+  top: 0,
+  right: 0,
+  bottom: 0,
+});
 
 const handleChangedList = () => {};
 const handleRemoveKeyListener = () => {};
@@ -67,8 +74,12 @@ const move = (event: MouseEvent) => {
   if (isMove.value) return;
   isMove.value = true;
   target.value.style.position = "absolute";
-  target.value.style.left = `${event.clientX}px`;
-  target.value.style.top = `${event.clientY}px`;
+  event.clientX > edgesOfGameField.left &&
+    event.clientX < edgesOfGameField.right &&
+    (target.value.style.left = `${event.clientX}px`);
+  event.clientY > edgesOfGameField.top &&
+    event.clientY < edgesOfGameField.bottom &&
+    (target.value.style.top = `${event.clientY}px`);
   setTimeout(() => {
     isMove.value = false;
   }, 50);
@@ -92,6 +103,13 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
     handleRemoveKeyListener();
   }
 });
+
+onMounted(() => {
+  edgesOfGameField.left = gameField.value.getBoundingClientRect().left;
+  edgesOfGameField.top = gameField.value.getBoundingClientRect().top;
+  edgesOfGameField.right = gameField.value.getBoundingClientRect().right;
+  edgesOfGameField.bottom = gameField.value.getBoundingClientRect().bottom;
+});
 </script>
 
 <template>
@@ -100,7 +118,7 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
       {{ sentences.list[counter][1] }}
     </h2>
     <div
-      class="dragdrop__answer flex justify-between"
+      ref="gameField"
       @mousedown="mousedown"
       @mousemove="move"
     >
@@ -194,6 +212,8 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
   }
 }
 .btn--word {
+  display: inline-block;
+
   &:hover,
   &:focus {
     border: 5px solid #000 !important;
