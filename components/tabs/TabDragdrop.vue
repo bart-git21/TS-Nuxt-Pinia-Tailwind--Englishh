@@ -6,12 +6,6 @@ const counter = ref(0);
 const target = ref(null) as Ref<HTMLElement | null>;
 const isMove = ref(false);
 const gameField = ref() as Ref<HTMLElement>;
-const edgesOfGameField = reactive({
-  left: 0,
-  top: 0,
-  right: 0,
-  bottom: 0,
-});
 
 const handleChangedList = () => {};
 const handleRemoveKeyListener = () => {};
@@ -74,12 +68,8 @@ const move = (event: MouseEvent) => {
   if (isMove.value) return;
   isMove.value = true;
   target.value.style.position = "absolute";
-  event.clientX > edgesOfGameField.left &&
-    event.clientX < edgesOfGameField.right &&
-    (target.value.style.left = `${event.clientX}px`);
-  event.clientY > edgesOfGameField.top &&
-    event.clientY < edgesOfGameField.bottom &&
-    (target.value.style.top = `${event.clientY}px`);
+  target.value.style.left = `${event.clientX}px`;
+  target.value.style.top = `${event.clientY}px`;
   setTimeout(() => {
     isMove.value = false;
   }, 50);
@@ -102,13 +92,6 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
   if (newVal) {
     handleRemoveKeyListener();
   }
-});
-
-onMounted(() => {
-  edgesOfGameField.left = gameField.value.getBoundingClientRect().left;
-  edgesOfGameField.top = gameField.value.getBoundingClientRect().top;
-  edgesOfGameField.right = gameField.value.getBoundingClientRect().right;
-  edgesOfGameField.bottom = gameField.value.getBoundingClientRect().bottom;
 });
 </script>
 
