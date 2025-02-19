@@ -96,11 +96,11 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
 </script>
 
 <template>
-  <div class="card-body d-flex flex-column justify-content-center text-center">
-    <h2 class="dragdrop__question fs-1 text-light">
+  <div class="card-body flex flex-col text-center">
+    <h2 class="flex-none dragdrop__question">
       {{ sentences.list[counter][1] }}
     </h2>
-    <div ref="gameField" @mousedown="mousedown" @mousemove="move">
+    <div class="board grow " ref="gameField" @mousedown="mousedown" @mousemove="move">
       <div class="btn btn--word" v-for="(word, index) in sentence" :key="index">
         {{ word }}
       </div>
