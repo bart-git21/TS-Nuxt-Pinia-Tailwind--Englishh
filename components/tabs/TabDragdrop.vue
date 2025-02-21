@@ -31,14 +31,12 @@ const start = () => {
 };
 
 const initSentence = () => {
-  if (counter.value < sentences.list.length) {
-    let words: string[] = sentences.list[counter.value][0]
-      .trim()
-      .toLowerCase()
-      .split(" ");
-    shuffle(words);
-    sentence.value = words;
-  } else counter.value = -1;
+  let words: string[] = sentences.list[counter.value][0]
+    .trim()
+    .toLowerCase()
+    .split(" ");
+  shuffle(words);
+  sentence.value = words;
 };
 
 const compareStrings = () => {
@@ -80,7 +78,9 @@ const move = (event: MouseEvent) => {
 };
 
 const incrementCounter = () => {
-  counter.value++;
+  if (counter.value < sentences.list.length) {
+    counter.value++;
+  } else counter.value = -1;
 };
 
 watch(counter, (val, oldChangedList) => {
