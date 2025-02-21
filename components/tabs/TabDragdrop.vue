@@ -32,10 +32,10 @@ const start = () => {
 
 const initSentence = () => {
   if (counter.value < sentences.list.length) {
-    let words: string[] =
-      sentences.list.length > 0
-        ? sentences.list[counter.value][0].trim().toLowerCase().split(" ")
-        : [];
+    let words: string[] = sentences.list[counter.value][0]
+      .trim()
+      .toLowerCase()
+      .split(" ");
     shuffle(words);
     sentence.value = words;
   } else counter.value = -1;
