@@ -21,8 +21,12 @@ const sentence: Ref<string[]> = ref([]);
 
 // logic
 const start = () => {
-  counter.value = 0;
   sentences.list = store.getShallowCopy();
+  if (!sentences.list.length) {
+    alert("The list is empty.");
+    return;
+  }
+  counter.value = 0;
   initSentence();
 };
 
@@ -100,7 +104,12 @@ watch(props.removeListeners, (newVal, oldremoveListeners) => {
     <h2 class="flex-none dragdrop__question">
       {{ sentences.list[counter][1] }}
     </h2>
-    <div class="board grow " ref="gameField" @mousedown="mousedown" @mousemove="move">
+    <div
+      class="board grow"
+      ref="gameField"
+      @mousedown="mousedown"
+      @mousemove="move"
+    >
       <div class="btn btn--word" v-for="(word, index) in sentence" :key="index">
         {{ word }}
       </div>
