@@ -6,6 +6,11 @@ const counter = ref(0);
 const target = ref(null) as Ref<HTMLElement | null>;
 const isMove = ref(false);
 const gameField = ref() as Ref<HTMLElement>;
+const $buttons = computed((): HTMLCollectionOf<HTMLDivElement> => {
+  return document.getElementsByClassName(
+    ".btn--word"
+  ) as HTMLCollectionOf<HTMLDivElement>;
+});
 
 const handleChangedList = () => {};
 const handleRemoveKeyListener = () => {};
@@ -40,19 +45,13 @@ const initSentence = () => {
 };
 
 // ============ TO DO ============
-// Error Handling: The initSentence() function could benefit from error handling for edge cases when sentences.list is empty or undefined, preventing potential runtime errors.
-
-// Performance Optimization: Cache the DOM query selector result in compareStrings() by moving document.querySelectorAll() to a computed property or mounted hook since it's unlikely the button elements change frequently.
-
+// Performance Optimization: Cache the DOM query selector result in compareStrings() by moving document.querySelectorAll() to a computed property or mounted hook
+// since it's unlikely the button elements change frequently.
 // State Management: Consider extracting the game state (counter, sentences, etc.) into a dedicated composable to improve reusability and separation of concerns.
-
 // Constants Extraction: Move magic strings/numbers (like initial values and CSS class names) into named constants at the top of the file for better maintainability.
 
 const compareStrings = () => {
-  const nodeList = document.querySelectorAll<HTMLDivElement>(
-    ".btn--word"
-  ) as NodeListOf<HTMLDivElement>;
-  let buttons: HTMLDivElement[] = [...nodeList];
+  const buttons: HTMLDivElement[] = [...$buttons.value];
   const userOrder: { [key: number]: string } = {};
   buttons.forEach((e: HTMLDivElement) => {
     const xCoord = e.getBoundingClientRect().x;
