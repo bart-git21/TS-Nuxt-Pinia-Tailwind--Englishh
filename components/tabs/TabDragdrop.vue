@@ -8,7 +8,7 @@ const isMove = ref(false);
 const gameField = ref() as Ref<HTMLElement>;
 const $buttons = computed((): HTMLCollectionOf<HTMLDivElement> => {
   return document.getElementsByClassName(
-    ".btn--word"
+    "btn--word"
   ) as HTMLCollectionOf<HTMLDivElement>;
 });
 
@@ -43,12 +43,6 @@ const initSentence = () => {
   shuffle(words);
   sentence.value = words;
 };
-
-// ============ TO DO ============
-// Performance Optimization: Cache the DOM query selector result in compareStrings() by moving document.querySelectorAll() to a computed property or mounted hook
-// since it's unlikely the button elements change frequently.
-// State Management: Consider extracting the game state (counter, sentences, etc.) into a dedicated composable to improve reusability and separation of concerns.
-// Constants Extraction: Move magic strings/numbers (like initial values and CSS class names) into named constants at the top of the file for better maintainability.
 
 const compareStrings = () => {
   const buttons: HTMLDivElement[] = [...$buttons.value];
