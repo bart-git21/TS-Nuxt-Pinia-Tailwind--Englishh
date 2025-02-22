@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { shuffle } from "@/utils/helpers.js";
+const btnClassName = "btn--word";
 const store = useListStore();
 const props = defineProps(["changedList", "removeListeners"]);
 const counter = ref(0);
@@ -8,7 +9,7 @@ const isMove = ref(false);
 const gameField = ref() as Ref<HTMLElement>;
 const $buttons = computed((): HTMLCollectionOf<HTMLDivElement> => {
   return document.getElementsByClassName(
-    "btn--word"
+    btnClassName
   ) as HTMLCollectionOf<HTMLDivElement>;
 });
 
