@@ -87,8 +87,9 @@ const move = (event: MouseEvent) => {
 };
 
 const incrementCounter = () => {
-  while (counter.value < sentences.list.length) counter.value++;
-  counter.value = -1;
+  counter.value < sentences.list.length
+    ? counter.value++
+    : (counter.value = -1);
 };
 
 watch(counter, (val, oldChangedList) => {
