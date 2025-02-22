@@ -39,6 +39,15 @@ const initSentence = () => {
   sentence.value = words;
 };
 
+// ============ TO DO ============
+// Error Handling: The initSentence() function could benefit from error handling for edge cases when sentences.list is empty or undefined, preventing potential runtime errors.
+
+// Performance Optimization: Cache the DOM query selector result in compareStrings() by moving document.querySelectorAll() to a computed property or mounted hook since it's unlikely the button elements change frequently.
+
+// State Management: Consider extracting the game state (counter, sentences, etc.) into a dedicated composable to improve reusability and separation of concerns.
+
+// Constants Extraction: Move magic strings/numbers (like initial values and CSS class names) into named constants at the top of the file for better maintainability.
+
 const compareStrings = () => {
   const nodeList = document.querySelectorAll<HTMLDivElement>(
     ".btn--word"
@@ -78,9 +87,8 @@ const move = (event: MouseEvent) => {
 };
 
 const incrementCounter = () => {
-  if (counter.value < sentences.list.length) {
-    counter.value++;
-  } else counter.value = -1;
+  while (counter.value < sentences.list.length) counter.value++;
+  counter.value = -1;
 };
 
 watch(counter, (val, oldChangedList) => {
